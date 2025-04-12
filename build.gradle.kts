@@ -1,9 +1,14 @@
 plugins {
     id("java")
+    id("application")
 }
 
 group = "com.dzmitryrymarau.algorithms"
 version = "0.1.0-SNAPSHOT"
+
+application {
+    mainClass = "RandomWord"
+}
 
 dependencies {
     implementation(files("libs/algs4.jar"))
@@ -12,4 +17,8 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
 }
