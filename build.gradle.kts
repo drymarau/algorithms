@@ -10,6 +10,12 @@ application {
     mainClass = "RandomWord"
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
 dependencies {
     implementation(files("libs/algs4.jar"))
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
