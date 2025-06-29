@@ -96,18 +96,13 @@ public class Board {
             if (row < 0 || row >= dimension()) continue;
             var column = emptyColumn + dColumn;
             if (column < 0 || column >= dimension()) continue;
-            exchange(emptyRow, emptyColumn, row, column);
-            neighbors.push(new Board(tiles));
-            exchange(emptyRow, emptyColumn, row, column);
+            neighbors.push(createBoardSwapping(emptyRow, emptyColumn, row, column));
         }
         return neighbors;
     }
 
     public Board twin() {
-        exchange(twinRow1, twinColumn1, twinRow2, twinColumn2);
-        var board = new Board(tiles);
-        exchange(twinRow1, twinColumn1, twinRow2, twinColumn2);
-        return board;
+        return createBoardSwapping(twinRow1, twinColumn1, twinRow2, twinColumn2);
     }
 
     private int row(int tile) {
@@ -118,6 +113,13 @@ public class Board {
     private int column(int tile) {
         if (tile <= 0) throw new IllegalArgumentException();
         return (tile - 1) % dimension();
+    }
+
+    private Board createBoardSwapping(int row1, int column1, int row2, int column2) {
+        exchange(row1, column1, row2, column2);
+        var board = new Board(tiles);
+        exchange(row1, column1, row2, column2);
+        return board;
     }
 
     private void exchange(int row1, int column1, int row2, int column2) {
